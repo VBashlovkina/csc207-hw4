@@ -16,48 +16,63 @@ public class oldCalculator
    * @post operations are done in the order in which they appear the value of
    *       the expression is returned
    */
-  
-  
+
   public static Fraction evaluate(String expr)
     throws Exception
   {
-    
+
     String[] parsed = expr.split(" ");
-    if (parsed.length % 2 == 0)
+    int arrLength = parsed.length;
+    if (arrLength % 2 == 0)
       {
-        throw new Exception("Invalid expression");
+        throw new Exception("Invalid expression format");
       }
-    else if (parsed.length == 1)
+    /*
+    else if (arrLength == 1)
       {
         return new Fraction(parsed[0]);
       }
+      */
     else
       {
-        
-        //Initializing the array of memory elements
-        Fraction[] r = new Fraction[8];
-        for (int i = 0; i<8; i++)
-          r[i] = Fraction.ZERO;
-        
+
+        // Initializing the array of memory elements
+        Fraction[] registers = new Fraction[8];
+        for (int i = 0; i < 8; i++)
+          registers[i] = Fraction.ZERO;
+
+        // Initializing variables used later in the evaluation
         Fraction soFar = new Fraction(parsed[0]);
         String oper = new String("");
-        
-        //Dealing with memory
+        Fraction arg = Fraction.ZERO;
+
+        // Dealing with memory assignments
         if (parsed[0].charAt(0) == 'r')
           {
-          if (parsed[0].length() > 2 || parsed[0].charAt(1).toString().parseInt() > 7)
-            throw new Exception ("Invalid memory element");
+          char rChar = parsed[0].charAt(1);
+          if (Character.isDigit(rChar))
+            {
+              int rNum = (int) Integer.valueOf(String.valueOf(rChar));
+              //Check if the index after r is an integer between 0 and 7
+              if (parsed[0].length() != 2 || rNum > 7)
+                throw new Exception("Invalid call to memory register");
+              else if (parsed[1] == "=")
+                 registers[rNum] = evaluate(expr.substring(5));
+            }
           else 
-          }
-        for (int i = 1; i < parsed.length; i++)
+            throw new Exception ("Invalid call to memory register");//NEED TO WRITE THIS EXCEPTION
+          }// if this is an assignment
+
+        // Dealing with everything else
+        for (int i = 1; i < parsed.length-1; i++)//look at operands
           {
-            if (i % 2 != 0) // if i is odd, it's an operator
-              {
-                oper = parsed[i];
-              }
-            else
-              {
-                Fraction arg = new Fraction(parsed[i]);
+            
+                oper = parsed[i++];
+                String temp = parsed[i];
+                if (temp.charAt(0) == 'r')
+                  arg = registers[temp.charAt(1)];//NEED TO CHECK IF VALID REGISTER
+                else
+                  arg = new Fraction(parsed[i]);
                 if (oper.compareTo("+") == 0)
                   soFar = soFar.add(arg);
                 else if (oper.compareTo("-") == 0)
@@ -68,12 +83,12 @@ public class oldCalculator
                   soFar = soFar.divide(arg);
                 else
                   {
-                    throw new Exception ("Invalid operand");
+                    throw new Exception("Invalid operand");
                   }
               }// else (it's a number)
-          }// for
+          }// for loop 
         return soFar;
-      }//else (after throwing)
+      }// else (after throwing)
 
   }// eval0 (String)
 

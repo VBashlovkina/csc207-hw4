@@ -46,10 +46,19 @@ public class Fraction
     this.simplify();
   }// Fraction (BigInteger)
 
+  
+  
   public Fraction(String input) throws Exception
   {
     String[] strArray = input.split("/");
-    this.numerator = new BigInteger(strArray[0]);
+    try 
+    {
+      this.numerator = new BigInteger(strArray[0]);
+    }
+    catch (Exception e)
+    {
+      throw new Exception ("Input must be a number");
+    }
     if (strArray.length == 2)
       {
         if (strArray[1] == "0")
@@ -58,8 +67,15 @@ public class Fraction
           }
         else
           {
-            this.denominator = new BigInteger(strArray[1]);
-            this.simplify();
+            try
+            {
+              this.denominator = new BigInteger(strArray[1]);
+              this.simplify();
+            }
+            catch (Exception e)
+            {
+              throw new Exception ("Input must be a number");
+            }
           }// nonzero denom
       }// length 2
     else if (strArray.length == 1)
@@ -69,7 +85,7 @@ public class Fraction
       }
     else
       {
-        throw new Exception("Invalid input");
+        throw new Exception("Invalid input (multiple slashes)");
       }
   }// Fraction(String)
 
