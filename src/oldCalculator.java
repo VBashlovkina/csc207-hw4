@@ -1,7 +1,27 @@
-import java.math.BigInteger;
 
 public class oldCalculator
 {
+  /**
+   *validRegister returns the register index if it's valid 
+   *otherwise it throws an exception
+   */
+  
+  public static int validRegister (String r) throws InvalidMemoryRegisterException
+  {
+    char rChar = r.charAt(1);
+    if (Character.isDigit(rChar))
+      {
+        int rNum = Integer.valueOf(String.valueOf(rChar));
+        //Check if the index after r is an integer between 0 and 7
+        if (r.length() != 2 || rNum > 7)
+          throw new InvalidMemoryRegisterException("Available memory registers are r0 - r7");
+        else 
+          return rNum;
+      } //if the next character is a digit
+    else  
+      throw new InvalidMemoryRegisterException();
+    }//validRegister(String)
+  
   /**
    * Computes simple operations including addition, subtraction, multiplication,
    * division and exponentiation.
@@ -30,12 +50,11 @@ public class oldCalculator
     /*
     else if (arrLength == 1)
       {
-        return new Fraction(parsed[0]);
+        return new Fraction(parsed[0]);// i don't think we need this
       }
-      */
     else
       {
-
+     */
         // Initializing the array of memory elements
         Fraction[] registers = new Fraction[8];
         for (int i = 0; i < 8; i++)
@@ -47,30 +66,16 @@ public class oldCalculator
         Fraction arg = Fraction.ZERO;
 
         // Dealing with memory assignments
-        if (parsed[0].charAt(0) == 'r')
-          {
-          char rChar = parsed[0].charAt(1);
-          if (Character.isDigit(rChar))
-            {
-              int rNum = (int) Integer.valueOf(String.valueOf(rChar));
-              //Check if the index after r is an integer between 0 and 7
-              if (parsed[0].length() != 2 || rNum > 7)
-                throw new Exception("Invalid call to memory register");
-              else if (parsed[1] == "=")
-                 registers[rNum] = evaluate(expr.substring(5));
-            }
-          else 
-            throw new Exception ("Invalid call to memory register");//NEED TO WRITE THIS EXCEPTION
-          }// if this is an assignment
+        if (parsed[0].charAt(0) == 'r' && parsed[1] == "=")
+                 registers[validRegister(parsed[0])] = evaluate(expr.substring(5));
 
         // Dealing with everything else
-        for (int i = 1; i < parsed.length-1; i++)//look at operands
+        for (int i = 1; i < parsed.length-1; i++)
           {
-            
                 oper = parsed[i++];
                 String temp = parsed[i];
                 if (temp.charAt(0) == 'r')
-                  arg = registers[temp.charAt(1)];//NEED TO CHECK IF VALID REGISTER
+                  arg = registers[validRegister(parsed[i])];
                 else
                   arg = new Fraction(parsed[i]);
                 if (oper.compareTo("+") == 0)
@@ -85,11 +90,11 @@ public class oldCalculator
                   {
                     throw new Exception("Invalid operand");
                   }
-              }// else (it's a number)
-          }// for loop 
+              }// for loop
+
         return soFar;
-      }// else (after throwing)
+      } //evaluate (String)
 
-  }// eval0 (String)
+  }//Calculator
 
-}
+

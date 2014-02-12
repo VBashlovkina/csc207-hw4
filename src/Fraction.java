@@ -12,7 +12,6 @@ public class Fraction
       {
         this.numerator = BigInteger.valueOf(num);
         this.denominator = BigInteger.valueOf(denom);
-        this.simplify();
       }
     else
       {
@@ -24,7 +23,6 @@ public class Fraction
   {
     this.numerator = BigInteger.valueOf(num);
     this.denominator = BigInteger.ONE;
-    this.simplify();
   }// Fraction (int)
 
   public Fraction(BigInteger num, BigInteger denom) throws Exception
@@ -106,8 +104,6 @@ public class Fraction
         this.numerator = this.numerator.negate();
         this.denominator = this.denominator.negate();
       }
-    if (this.numerator.compareTo(BigInteger.ZERO) == 0)
-    	  this.denominator = BigInteger.ONE;
   }// cleanup()
 
   public Fraction add(Fraction other)
