@@ -162,19 +162,23 @@ public class Fraction
     return (this.numerator.toString() + "/" + this.denominator.toString());
   }// toString()
 
+  
   public Boolean equals(Fraction other)
   {
+    //this.simplify();
+    //other.simplify();
     if (this.denominator.equals(other.denominator)
         && this.numerator.equals(other.numerator))
       return true;
     else
       return false;
   }//equals(Fraction)
-  
+  /*
   public int hashCode()
   {
+    //this.simplify();
     return this.denominator.hashCode() + this.numerator.hashCode(); 
   }//hashCode()
-  
+  */
   
 }
