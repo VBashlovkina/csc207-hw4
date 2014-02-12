@@ -95,6 +95,17 @@ public class oldCalculator
         return soFar;
       } //evaluate (String)
 
+  public static Fraction[] evaluate(String[] expressions) throws Exception
+  {
+    Fraction[] answers = new Fraction[expressions.length];
+    
+    for (int i = 0; i < expressions.length; i++)
+      {
+        answers[i] = evaluate(expressions[i]);
+      }
+    return answers;
+  }
+  
   }//Calculator
 
 
