@@ -3,7 +3,7 @@ import java.math.BigInteger;
 /**
  * An implementation for Fractions
  * 
- * @author
+ * @author Vasilisa Bashlovkina
  * @author Daniel Nanetti-Palacios
  * @author CSC207 2014S
  */
