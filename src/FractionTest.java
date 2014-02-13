@@ -8,7 +8,7 @@ public class FractionTest
 {
 
   @Test
-  public void test()
+  public void fractionTest()
     throws Exception
   {
     for (int i = -10; i < 10; i++)
@@ -35,7 +35,8 @@ public class FractionTest
                      (new Fraction(i * 2).divide(new Fraction(2)).numerator));
         assertEquals("toStringtest", (Integer.toString(i) + "/1"),
                      new Fraction(i * 2, 2).toString());
-      }
-  }
+      }//for
+  }//fractionTest
+  
 
 }

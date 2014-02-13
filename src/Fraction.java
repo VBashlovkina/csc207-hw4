@@ -173,12 +173,12 @@ public class Fraction
     else
       return false;
   }//equals(Fraction)
-  /*
+  
   public int hashCode()
   {
     //this.simplify();
     return this.denominator.hashCode() + this.numerator.hashCode(); 
   }//hashCode()
-  */
+  
   
 }
