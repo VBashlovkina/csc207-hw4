@@ -33,10 +33,64 @@ public class FractionTest
                      (new Fraction(i).multiply(new Fraction(2)).numerator));
         assertEquals("divisiontest", BigInteger.valueOf(i),
                      (new Fraction(i * 2).divide(new Fraction(2)).numerator));
-        assertEquals("toStringtest", (Integer.toString(i) + "/1"),
-                     new Fraction(i * 2, 2).toString());
-      }//for
-  }//fractionTest
-  
 
-}
+      }// for
+  }// fractionTest
+
+  @Test
+  public void fractionTest2()
+    throws Exception
+  {
+    assertEquals("toStringtest", ("56/41"), new Fraction(56, 41).toString());
+  }
+
+  @Test(expected = Exception.class)
+  public void invalidDenom()
+    throws Exception
+  {
+    Fraction f = new Fraction(1, 0);
+  }// invalidDenom1
+
+  @Test(expected = Exception.class)
+  public void invalidDenom2()
+    throws Exception
+  {
+    Fraction f = new Fraction(BigInteger.ONE, BigInteger.ZERO);
+  }// invalidDenom2
+
+  @Test(expected = Exception.class)
+  public void invalidDenom3()
+    throws Exception
+  {
+    Fraction f = new Fraction("1/0");
+  }// invalidDenom3()
+
+  @Test(expected = Exception.class)
+  public void InvalidInput1()
+    throws Exception
+  {
+    Fraction f = new Fraction("a/1");
+  }// InvalidInput1
+
+  @Test(expected = Exception.class)
+  public void InvalidInput2()
+    throws Exception
+  {
+    Fraction f = new Fraction("1/a");
+  }// InvalidInput2
+
+  @Test(expected = Exception.class)
+  public void InvalidInput3()
+    throws Exception
+  {
+    Fraction f = new Fraction("a/b");
+  }// InvalidInput3
+
+  @Test(expected = Exception.class)
+  public void InvalidInput4()
+    throws Exception
+  {
+    Fraction f = new Fraction("1/2/3");
+  }// InvalidInput4
+
+}// FractionTest
