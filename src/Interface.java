@@ -3,7 +3,7 @@ import java.io.PrintWriter;
 /**
  * A user interface for the Calculator class.
  * 
- * @author
+ * @author Vasilisa Bashlovkina
  * @author Daniel Nanetti-Palacios
  * @author CSC207 2014S
  */
