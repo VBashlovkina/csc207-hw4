@@ -8,9 +8,9 @@ public class Calculator
    * index if it's valid, throws InvalidMemoryRegisterException otherwise.
    * 
    * @param String
-   *          str, the parsed string containing reference to register
-   * 
-   * @pre str starts with 'r'
+   *          r, the parsed string containing reference to register
+   * @throws InvalidMemoryRegisterException
+   * @pre r starts with 'r'
    * @post register index is returned
    */
 
@@ -37,16 +37,20 @@ public class Calculator
 
   /**
    * Computes simple operations including addition, subtraction, multiplication,
-   * division on integers and fractions
+   * division on integers and fractions. Allows storing values in 8 memory
+   * registers referred to as r0 - r7.
    * 
    * @param String
    *          expr, the expression to evaluate
-   * @return the value of the expression
+   * @return the value of the expression or the value of the assignment
+   * @throws Exception
    * @pre expr is non null. It consists exclusively of sequences of digits
    *      (integers or fraction in the format a/b where b!=0) and the operators
    *      +, -, * or /. Numbers and operators are separated by a space. Every
    *      other element is an operator. The first and the last element of the
-   *      expression are numbers
+   *      expression are numbers or register references. Assignment of registers
+   *      has to be single (e.g.: r0 = 8 works, but r6 = r5 = r7 = 6 doesn't
+   *      work.
    * @post operations are done in the order in which they appear. The value of
    *       the expression is returned
    */
@@ -76,10 +80,9 @@ public class Calculator
             return registers[index];
           }
         else
-          {
-            parsed[0] = registers[index].toString();
-          }
-      }
+          parsed[0] = registers[index].toString();
+      }// if the first char is 'r'
+
     // Dealing with non-assignment expressions
     soFar = new Fraction(parsed[0]);
     for (int i = 1; i < parsed.length - 1; i++)
@@ -101,24 +104,27 @@ public class Calculator
         else if (oper.compareTo("/") == 0)
           soFar = soFar.divide(arg);
         else
-          {
             throw new Exception("Invalid operand " + oper);
-          }
       }// evaluating for loop
 
     return soFar;
   }// evaluate (String)
 
-  // needs comments, i can do it later
+  /**
+   * Implements "evaluate" on an array of expressions
+   * 
+   * @param expressions
+   *          - array of valid expressions
+   * @return an array of answers to the expressions
+   * @throws Exception
+   */
   public static Fraction[] evaluate(String[] expressions)
     throws Exception
   {
     Fraction[] answers = new Fraction[expressions.length];
 
     for (int i = 0; i < expressions.length; i++)
-      {
         answers[i] = evaluate(expressions[i]);
-      }
     return answers;
   }// evaluate (String[])
 
