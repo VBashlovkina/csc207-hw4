@@ -97,7 +97,7 @@ public class Fraction
       } // catch (Exception e)
     if (strArray.length == 2)
       {
-        if (strArray[1] == "0")
+        if (strArray[1].compareTo("0") == 0)
           {
             throw new Exception("Invalid Denominator");
           } // if denominator is not 0
