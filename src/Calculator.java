@@ -1,7 +1,7 @@
 /**
  * A Calculator program that works with Fractions 
  * 
- * @author
+ * @author Vasilisa Bashlovkina
  * @author Daniel Nanetti-Palacios
  * @author CSC207 2014S
  */
