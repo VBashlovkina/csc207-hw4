@@ -1,5 +1,13 @@
 import java.io.PrintWriter;
 
+/**
+ * A user interface for the Calculator class.
+ * 
+ * @author
+ * @author Daniel Nanetti-Palacios
+ * @author CSC207 2014S
+ */
+
 public class Interface
 {
   /**

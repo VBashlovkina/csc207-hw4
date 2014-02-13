@@ -1,3 +1,12 @@
+
+/**
+ * A Calculator program that works with Fractions 
+ * 
+ * @author
+ * @author Daniel Nanetti-Palacios
+ * @author CSC207 2014S
+ */
+
 public class Calculator
 {
   // Array of memory registers
