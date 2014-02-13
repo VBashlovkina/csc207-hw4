@@ -253,8 +253,6 @@ public class Fraction
 
   public Boolean equals(Fraction other)
   {
-    // this.simplify();
-    // other.simplify();
     if (this.denominator.equals(other.denominator)
         && this.numerator.equals(other.numerator))
       return true;
