@@ -1,49 +1,9 @@
-
-/**
- * A Calculator program that works with Fractions 
- * 
- * @author
- * @author Daniel Nanetti-Palacios
- * @author CSC207 2014S
- */
-
 public class Calculator
 {
   // Array of memory registers
   static Fraction[] registers = new Fraction[8];
 
-  /**
-   * Determines the validity of the register reference, returns the register
-   * index if it's valid, throws InvalidMemoryRegisterException otherwise.
-   * 
-   * @param String
-   *          r, the parsed string containing reference to register
-   * @throws InvalidMemoryRegisterException
-   * @pre r starts with 'r'
-   * @post register index is returned
-   */
-
-  public static int validRegister(String r)
-    throws InvalidMemoryRegisterException
-  {
-    char rChar = r.charAt(1);
-    if (Character.isDigit(rChar))
-      {
-        int rNum = Integer.valueOf(String.valueOf(rChar));
-        // Check if the index after r is an integer between 0 and 7
-        if (r.length() != 2 || rNum > 7)
-          throw new InvalidMemoryRegisterException(
-                                                   "Tried to access r"
-                                                       + rNum
-                                                       + ". Available memory registers are r0 - r7");
-        else
-          return rNum;
-      } // if the next character is a digit
-    else
-      throw new InvalidMemoryRegisterException("Tried to access " + r
-                                               + ", which is invalid");
-  }// validRegister(String)
-
+  
   /**
    * Computes simple operations including addition, subtraction, multiplication,
    * division on integers and fractions. Allows storing values in 8 memory
@@ -61,7 +21,7 @@ public class Calculator
    *      has to be single (e.g.: r0 = 8 works, but r6 = r5 = r7 = 6 doesn't
    *      work.
    * @post operations are done in the order in which they appear. The value of
-   *       the expression is returned
+   *       the expression or assignment is returned
    */
 
   public static Fraction evaluate(String expr)
@@ -126,6 +86,9 @@ public class Calculator
    *          - array of valid expressions
    * @return an array of answers to the expressions
    * @throws Exception
+   * @pre expressions contains strings that satisfy the requirements 
+   * of evaluate(String) method
+   * 
    */
   public static Fraction[] evaluate(String[] expressions)
     throws Exception
@@ -136,6 +99,38 @@ public class Calculator
         answers[i] = evaluate(expressions[i]);
     return answers;
   }// evaluate (String[])
+
+  /**
+   * Determines the validity of the register reference, returns the register
+   * index if it's valid, throws InvalidMemoryRegisterException otherwise.
+   * 
+   * @param String
+   *          r, the parsed string containing reference to register
+   * @throws InvalidMemoryRegisterException
+   * @pre r starts with 'r'
+   * @post register index is returned
+   */
+
+  public static int validRegister(String r)
+    throws InvalidMemoryRegisterException
+  {
+    char rChar = r.charAt(1);
+    if (Character.isDigit(rChar))
+      {
+        int rNum = Integer.valueOf(String.valueOf(rChar));
+        // Check if the index after r is an integer between 0 and 7
+        if (r.length() != 2 || rNum > 7)
+          throw new InvalidMemoryRegisterException(
+                                                   "Tried to access r"
+                                                       + rNum
+                                                       + ". Available memory registers are r0 - r7");
+        else
+          return rNum;
+      } // if the next character is a digit
+    else
+      throw new InvalidMemoryRegisterException("Tried to access " + r
+                                               + ", which is invalid");
+  }// validRegister(String)
 
 }// Calculator
 
